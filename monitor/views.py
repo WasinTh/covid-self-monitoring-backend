@@ -2,6 +2,7 @@ import json
 from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework import viewsets
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -29,6 +30,7 @@ class AllMeasurementView(APIView):
 class MeasurementGenericsView(generics.ListCreateAPIView):
     queryset = Measurement.objects.all()
     serializer_class = MeasurementSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class SymptomGenericsView(generics.ListCreateAPIView):
