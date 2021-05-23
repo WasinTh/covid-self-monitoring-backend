@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from monitor.models import Measurement
 
-# Create your views here.
+
+def current_temperature(request):
+    return HttpResponse(f"Temperature : {Measurement.objects.last().temperature}")
