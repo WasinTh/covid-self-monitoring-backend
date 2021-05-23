@@ -28,6 +28,12 @@ DEBUG = True
 
 SHELL_PLUS = "ipython"
 
+CORS_ALLOW_ALL_ORIGINS = DEBUG
+
+CORS_ALLOWED_ORIGINS = [
+    "https://selfmonitoring.tailor-solutions.com",
+]
+
 ALLOWED_HOSTS = []
 
 
@@ -44,12 +50,14 @@ INSTALLED_APPS = [
     'django_extensions',
     'drf_yasg',
     'django_filters',
+    'corsheaders',
     'monitor',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
