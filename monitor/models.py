@@ -20,7 +20,7 @@ class Measurement(models.Model):
     o2sat = models.IntegerField(help_text='อ๊อกซิเจนในเลือด')
     systolic = models.IntegerField(help_text='ความดันตัวบน')
     diastolic = models.IntegerField(help_text='ความดันตัวล่าง')
-    symptoms = models.ManyToManyField(Symptom, help_text='อาการที่พบ')
+    symptoms = models.ManyToManyField(Symptom, blank=True, help_text='อาการที่พบ')
 
     @property
     def symptoms_display(self):
