@@ -1,5 +1,4 @@
 from django.urls import path
-from monitor import views
 from django.urls import include
 from rest_framework.routers import DefaultRouter
 from monitor import views
