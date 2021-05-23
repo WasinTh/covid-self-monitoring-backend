@@ -1,19 +1,21 @@
 import datetime
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from monitor.models import Measurement
+from monitor.models import Measurement, Symptom
 
 User = get_user_model()
 
 
-class MeasurementSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    created = serializers.DateTimeField(default=datetime.datetime.now())
-    temperature = serializers.DecimalField(max_digits=4, decimal_places=2)
-    o2sat = serializers.IntegerField()
-    systolic = serializers.IntegerField()
-    diastolic = serializers.IntegerField()
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+class SymptomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Symptom
+        fields = '__all__'
 
-    def create(self, validated_data):
-        return Measurement.objects.create(**validated_data)
+
+class MeasurementSerializer(serializers.ModelSerializer):
+    created = serializers.DateTimeField(default=datetime.datetime.now())
+    symptoms = SymptomSerializer(many=True)
+
+    class Meta:
+        model = Measurement
+        fields = '__all__'
