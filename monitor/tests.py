@@ -57,3 +57,28 @@ class TestCreateMeasurementAPI(TestCase):
         self.data['temperature'] = 90
         response = self.client.post(reverse('measurement-list'), data=self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST, response.data)
+
+
+class TestUpdateMeasurementAPI(TestCase):
+    def setUp(self):
+        self.user_1 = UserFactory()
+        self.user_2 = UserFactory()
+        self.data = {
+            'created': timezone.now(),
+            'temperature': 36.8,
+            'o2sat': 97,
+            'systolic': 124,
+            'diastolic': 90,
+            'symptoms': []
+        }
+
+    def test_update_error(self):
+        client = APIClient()
+        client.force_authenticate(user=self.user_2)
+        measurement = MeasurementFactory(user=self.user_1)
+        response = client.put(
+            reverse('measurement-detail', kwargs={'pk': measurement.id}),
+            data=self.data,
+            format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST, response.data)

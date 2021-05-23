@@ -25,6 +25,11 @@ class MeasurementSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Unreasonable temperature')
         return data
 
+    def validate_user(self, data):
+        if self.instance and self.instance.user != data:
+            raise serializers.ValidationError('Cannot update other user instance')
+        return data
+
     class Meta:
         model = Measurement
         fields = '__all__'
