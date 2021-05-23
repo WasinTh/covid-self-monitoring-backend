@@ -52,3 +52,8 @@ class TestCreateMeasurementAPI(TestCase):
         response = self.client.post(reverse('measurement-list'), data=self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED, response.data)
         self.assertEqual(Measurement.objects.filter(user=self.user).count(), 1)
+
+    def test_error_temperature(self):
+        self.data['temperature'] = 90
+        response = self.client.post(reverse('measurement-list'), data=self.data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST, response.data)

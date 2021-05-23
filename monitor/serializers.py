@@ -20,6 +20,11 @@ class MeasurementSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(),
                                               default=serializers.CurrentUserDefault())
 
+    def validate_temperature(self, data):
+        if data < 30 or data > 50:
+            raise serializers.ValidationError('Unreasonable temperature')
+        return data
+
     class Meta:
         model = Measurement
         fields = '__all__'
