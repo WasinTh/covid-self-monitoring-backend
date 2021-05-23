@@ -1,6 +1,7 @@
 import json
 from django.http import HttpResponse
 from rest_framework import generics
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -33,3 +34,14 @@ class MeasurementGenericsView(generics.ListCreateAPIView):
 class SymptomGenericsView(generics.ListCreateAPIView):
     queryset = Symptom.objects.all()
     serializer_class = SymptomSerializer
+
+
+class MeasurementViewsets(viewsets.ModelViewSet):
+    queryset = Measurement.objects.all()
+    serializer_class = MeasurementSerializer
+
+
+class SymptomViewsets(viewsets.ReadOnlyModelViewSet):
+    queryset = Symptom.objects.all()
+    serializer_class = SymptomSerializer
+
