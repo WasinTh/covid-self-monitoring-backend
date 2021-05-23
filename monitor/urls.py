@@ -5,4 +5,5 @@ urlpatterns = [
     path('current-temperature/', views.current_temperature),
     path('all-measurement/', views.all_measurement),
     path('all-measurement-api-view/', views.AllMeasurementView.as_view()),
+    path('measurement-generics-view/', views.MeasurementGenericsView.as_view()),
 ]

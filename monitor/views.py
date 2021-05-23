@@ -1,5 +1,6 @@
 import json
 from django.http import HttpResponse
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -22,3 +23,8 @@ class AllMeasurementView(APIView):
     def get(self, request):
         serializer = MeasurementSerializer(Measurement.objects.all(), many=True)
         return Response(data=serializer.data)
+
+
+class MeasurementGenericsView(generics.ListCreateAPIView):
+    queryset = Measurement.objects.all()
+    serializer_class = MeasurementSerializer
