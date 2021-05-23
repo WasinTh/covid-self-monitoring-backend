@@ -41,6 +41,7 @@ class SymptomGenericsView(generics.ListCreateAPIView):
 class MeasurementViewsets(viewsets.ModelViewSet):
     queryset = Measurement.objects.all()
     serializer_class = MeasurementSerializer
+    filterset_fields = ('user__id', 'user__username')
 
 
 class SymptomViewsets(viewsets.ReadOnlyModelViewSet):

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'drf_yasg',
+    'django_filters',
     'monitor',
 ]
 
@@ -139,6 +140,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
 
