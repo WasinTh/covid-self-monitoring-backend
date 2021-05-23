@@ -15,6 +15,8 @@ class SymptomSerializer(serializers.ModelSerializer):
 class MeasurementSerializer(serializers.ModelSerializer):
     created = serializers.DateTimeField(default=datetime.datetime.now())
     symptoms = SymptomSerializer(many=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(),
+                                              default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Measurement
